@@ -18,4 +18,8 @@ public class PremioService {
     public List<Premio> listarPremio(){
         return this.premioRepository.findAll();
     }
+
+    public Premio listarPremioPorId(Integer premioId){
+        return this.premioRepository.findById(premioId).orElse(null);
+    }
 }

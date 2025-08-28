@@ -1,6 +1,7 @@
 package com.senac.games.service;
 
 import com.senac.games.entity.Jogo;
+import com.senac.games.entity.Usuario;
 import com.senac.games.repository.JogoRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,10 @@ public class JogoService {
 
     public List<Jogo> listarJogos(){
         return jogoRepository.findAll();
+    }
+
+    public Jogo listarJogoPorId(Integer JogoId){
+        return this.jogoRepository.findById(JogoId).orElse(null);
+
     }
 }

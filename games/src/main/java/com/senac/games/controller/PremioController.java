@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,4 +28,15 @@ public class PremioController {
     public ResponseEntity<List<Premio>> listarPremio(){
         return ResponseEntity.ok(premioService.listarPremio());
     }
+
+    @GetMapping("/listarPorPremioId/{premioId}")
+    @Operation(summary = "Listar Premio por Id", description = "Endpoint para listar um premio dado seu Id ")
+    public ResponseEntity<Premio> listarPremioId(@PathVariable("premioId")Integer premioId){
+        Premio premio = premioService.listarPremioPorId(premioId);
+        if (premio ==null)
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.ok(premio);
+    }
+
 }
