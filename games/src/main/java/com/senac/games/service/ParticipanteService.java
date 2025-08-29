@@ -1,7 +1,9 @@
 package com.senac.games.service;
 
 import com.senac.games.dto.request.ParticipanteDTORequest;
+import com.senac.games.dto.request.ParticipanteDTOUpdateRequest;
 import com.senac.games.dto.response.ParticipanteDTOResponse;
+import com.senac.games.dto.response.ParticipanteDTOUpdateResponse;
 import com.senac.games.entity.Participante;
 import com.senac.games.repository.ParticipanteRepository;
 import org.modelmapper.ModelMapper;
@@ -40,6 +42,49 @@ public class ParticipanteService {
         ParticipanteDTOResponse participanteDTOResponse = modelMapper.map(participanteSave, ParticipanteDTOResponse.class);
         return participanteDTOResponse;}
 
+    public ParticipanteDTOResponse atualizarParticipante(Integer participanteId, ParticipanteDTORequest participanteDTORequest) {
+        Participante participante = this.listarParticipantePorId(participanteId);
+        if (participante != null){
+            modelMapper.map(participanteDTORequest, participante);
+
+
+            Participante tempoResponse = participanteRepository.save(participante);
+            return modelMapper.map(tempoResponse,ParticipanteDTOResponse.class);
+
+
+        }
+        else
+            return null;
+    }
+
+    public ParticipanteDTOUpdateResponse atualizarStatusParticipante(Integer participanteId, ParticipanteDTOUpdateRequest participanteDTOUpdateRequest) {
+        Participante participante = this.listarParticipantePorId(participanteId);
+        if(participante != null){
+            modelMapper.map(participanteDTOUpdateRequest,participante);
+
+            Participante participanteUpdate = participanteRepository.save(participante);
+            return modelMapper.map(participanteUpdate, ParticipanteDTOUpdateResponse.class);
+        }
+        else
+            return null;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //        /*
 //        Participante participante = new Participante();
@@ -63,4 +108,4 @@ public class ParticipanteService {
 //        return participanteDTOResponse;
 
 //    }
-}
+
