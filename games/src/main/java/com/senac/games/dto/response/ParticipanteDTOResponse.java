@@ -1,5 +1,9 @@
 package com.senac.games.dto.response;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+
 public class ParticipanteDTOResponse {
 
 
@@ -51,12 +55,19 @@ public class ParticipanteDTOResponse {
         this.status = status;
     }
 
+    @NotEmpty
     private int id;
+
+    @NotEmpty
+    @Min(0)
+    @Max(2)
+    private int status;
+
     private String nome;
     private String email;
     private String identificacao;
     private String endereco;
-    private int status;
+
 
 
 

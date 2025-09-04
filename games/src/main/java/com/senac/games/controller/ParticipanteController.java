@@ -68,4 +68,10 @@ public class ParticipanteController {
 
     }
 
+    @DeleteMapping("Deletar/{participanteId}")
+    @Operation(summary = "Remover participante", description = "Endpoint para remover um participante dado seu ID")
+    public void apagarParticipante(@PathVariable("participanteId") Integer participanteId){
+        this.participanteService.apagarParticipante(participanteId);
+    }
+
 }

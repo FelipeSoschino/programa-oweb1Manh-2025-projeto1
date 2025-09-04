@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
-public class ParticipanteDTOUpdateResponse {
+public class PatrocinadorDTOUpdateResponse {
     public int getId() {
         return id;
     }
@@ -20,7 +20,6 @@ public class ParticipanteDTOUpdateResponse {
     public void setStatus(int status) {
         this.status = status;
     }
-
     @NotEmpty
     private int id;
 

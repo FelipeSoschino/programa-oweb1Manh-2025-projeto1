@@ -26,11 +26,12 @@ public class ParticipanteService {
 
 
     public List<Participante> listarParticipante(){
-        return this.participanteRepository.findAll();
+        return this.participanteRepository.listarParticipantes();
     }
 
     public Participante listarParticipantePorId(Integer participanteId){
-        return this.participanteRepository.findById(participanteId).orElse(null);
+
+        return this.participanteRepository.listarParticipantePorId(participanteId);
     }
 
 
@@ -67,6 +68,10 @@ public class ParticipanteService {
         }
         else
             return null;
+    }
+
+    public void apagarParticipante(Integer participateId){
+        this.participanteRepository.apagarParticipante(participateId);
     }
 }
 

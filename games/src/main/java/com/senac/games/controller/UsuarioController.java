@@ -1,9 +1,19 @@
 package com.senac.games.controller;
 
+import com.senac.games.dto.request.PatrocinadoDTOUpdateRequest;
+import com.senac.games.dto.request.PatrocinadorDTORequest;
+import com.senac.games.dto.request.UsuarioDTORequest;
+import com.senac.games.dto.request.UsuarioDTOUpdateRequest;
+import com.senac.games.dto.response.PatrocinadorDTOResponse;
+import com.senac.games.dto.response.PatrocinadorDTOUpdateResponse;
+import com.senac.games.dto.response.UsuarioDTOResponse;
+import com.senac.games.dto.response.UsuarioDTOUpdateResponse;
 import com.senac.games.entity.Usuario;
 import com.senac.games.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +46,34 @@ public class UsuarioController {
         else
             return ResponseEntity.ok(usuario);
     }
+
+
+    @PostMapping("/criar")
+    @Operation(summary = "Criar Usuario", description = "End point para criação de um novo Usuario")
+    public ResponseEntity<UsuarioDTOResponse> criarPatroinador(@Valid @RequestBody UsuarioDTORequest usuarioDTORequest){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.usuarioService.criarUsuario(usuarioDTORequest));
+    }
+
+    @PutMapping("/atualizar/{usuarioId}")
+    @Operation(summary = "Atualizar Usuario",description = "Endpont para atualizar os dados de um Usuario")
+    public ResponseEntity<UsuarioDTOResponse> atualizarUsuario(@PathVariable("usuarioId")Integer usuarioId,
+                                                                         @RequestBody UsuarioDTORequest usuarioDTORequest){
+        return ResponseEntity.ok(this.usuarioService.atualizarUsuario(usuarioId,usuarioDTORequest));
+    }
+
+    @PatchMapping("atualizarStatus/{usuarioId}")
+    @Operation(summary = "Atualizar Status do Usuario",description = "Endpont para atualizar o status de um Usuario")
+    public ResponseEntity<UsuarioDTOUpdateResponse> atualizarStatusUsuario(@PathVariable("usuarioId")Integer usuarioId,
+                                                                           @RequestBody UsuarioDTOUpdateRequest usuarioDTOUpdateRequest){
+        return ResponseEntity.ok(this.usuarioService.atualizarStatusUsuario(usuarioId,usuarioDTOUpdateRequest));
+    }
+
+    @DeleteMapping("Deletar/{usuarioId}")
+    @Operation(summary = "Remover usuario", description = "Endpoint para remover um usuario dado seu ID")
+    public void apagarUsuario(@PathVariable("usuarioId") Integer usuarioId){
+        this.usuarioService.apagarUsuario(usuarioId);
+    }
+
 
 
 

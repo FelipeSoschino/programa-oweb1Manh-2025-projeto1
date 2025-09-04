@@ -1,7 +1,9 @@
 package com.senac.games.service;
 
 import com.senac.games.dto.request.JogoDTORequest;
+import com.senac.games.dto.request.JogoDTOUpdateRequest;
 import com.senac.games.dto.response.JogoDTOResponse;
+import com.senac.games.dto.response.JogoDTOUpdateResponse;
 import com.senac.games.entity.Jogo;
 import com.senac.games.entity.Usuario;
 import com.senac.games.repository.JogoRepository;
@@ -25,11 +27,11 @@ public class JogoService {
     }
 
     public List<Jogo> listarJogos(){
-        return jogoRepository.findAll();
+        return jogoRepository.listarJogos();
     }
 
-    public Jogo listarJogoPorId(Integer JogoId){
-        return this.jogoRepository.findById(JogoId).orElse(null);
+    public Jogo listarJogoPorId(Integer jogoId){
+        return this.jogoRepository.listarJogoPorId(jogoId);
 
     }
 
@@ -42,4 +44,34 @@ public class JogoService {
         return jogoDTOResponse;
 
     }
+
+    public JogoDTOResponse atualizarJogo(Integer jogoId, JogoDTORequest jogoDTORequest){
+        Jogo jogo = this.listarJogoPorId(jogoId);
+        if(jogo!=null){
+            modelMapper.map(jogoDTORequest,jogo);
+            Jogo jogoSave = this.jogoRepository.save(jogo);
+
+            JogoDTOResponse jogoDTOResponse = modelMapper.map(jogoSave, JogoDTOResponse.class);
+            return jogoDTOResponse;}
+        else
+            return null;
+    }
+
+    public JogoDTOUpdateResponse atualizarStatusJogo(Integer jogoId, JogoDTOUpdateRequest jogoDTOUpdateRequest){
+        Jogo jogo = this.listarJogoPorId(jogoId);
+        if(jogo!=null){
+            modelMapper.map(jogoDTOUpdateRequest,jogo);
+            Jogo jogoSave = this.jogoRepository.save(jogo);
+
+            JogoDTOUpdateResponse jogoDTOUpdateResponse = modelMapper.map(jogoSave, JogoDTOUpdateResponse.class);
+            return jogoDTOUpdateResponse;}
+        else
+            return null;
+    }
+
+    public void apagarJogo(Integer jogoId){
+        this.jogoRepository.apagarJogo(jogoId);
+    }
+
+
 }
