@@ -18,8 +18,8 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
     @Query("UPDATE Categoria p SET p.status = -1 where p.id = :id")
     void apagarCategoria(Integer categoriaId);
 
-    @Query("SELECT P FROM Categoria p where p.status >= 0")
+    @Query("SELECT p FROM Categoria p where p.status >= 0")
     List<Categoria> listarCategorias();
-    @Query("SELECT P FROM Categoria p where p.status >= 0 AND p.id = :id")
+    @Query("SELECT p FROM Categoria p where p.status >= 0 AND p.id = :id")
     Categoria listarCategoriaPorId(@Param("id") Integer categoriaId);
 }

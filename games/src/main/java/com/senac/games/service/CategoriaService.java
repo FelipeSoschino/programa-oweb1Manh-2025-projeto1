@@ -25,11 +25,11 @@ public class CategoriaService {
     }
 
     public List<Categoria> listarCategorias(){
-        return categoriaRepository.findAll();
+        return categoriaRepository.listarCategorias();
     }
 
     public Categoria listarCategoriaPorId(Integer categoriaId){
-        return this.categoriaRepository.findById(categoriaId).orElse(null);}
+        return this.categoriaRepository.listarCategoriaPorId(categoriaId);}
 
     public CategoriaDTOResponse criarCategoria(CategoriaDTORequest categoriaDTORequest){
         Categoria categoria = modelMapper.map(categoriaDTORequest, Categoria.class);

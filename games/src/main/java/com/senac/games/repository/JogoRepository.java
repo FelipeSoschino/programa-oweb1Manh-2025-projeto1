@@ -18,8 +18,8 @@ public interface JogoRepository extends JpaRepository<Jogo, Integer> {
     @Query("UPDATE Jogo p SET p.status = -1 where p.id = :id")
     void apagarJogo(Integer jogoId);
 
-    @Query("SELECT P FROM Jogo p where p.status >= 0")
+    @Query("SELECT p FROM Jogo p where p.status >= 0")
     List<Jogo> listarJogos();
-    @Query("SELECT P FROM Jogo p where p.status >= 0 AND p.id = :id")
+    @Query("SELECT p FROM Jogo p where p.status >= 0 AND p.id = :id")
     Jogo listarJogoPorId(@Param("id") Integer jogoId);
 }

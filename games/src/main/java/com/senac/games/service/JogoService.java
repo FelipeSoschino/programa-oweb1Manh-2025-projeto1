@@ -6,6 +6,7 @@ import com.senac.games.dto.response.JogoDTOResponse;
 import com.senac.games.dto.response.JogoDTOUpdateResponse;
 import com.senac.games.entity.Jogo;
 import com.senac.games.entity.Usuario;
+import com.senac.games.repository.CategoriaRepository;
 import com.senac.games.repository.JogoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ import java.util.List;
 public class JogoService {
 
     private JogoRepository jogoRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    public JogoService(JogoRepository jogoRepository){
+    public JogoService(JogoRepository jogoRepository,CategoriaRepository categoriaRepository){
         this.jogoRepository = jogoRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     public List<Jogo> listarJogos(){
@@ -36,7 +39,10 @@ public class JogoService {
     }
 
     public JogoDTOResponse criarJogo(JogoDTORequest jogoDTORequest){
-        Jogo jogo = modelMapper.map(jogoDTORequest, Jogo.class);
+        Jogo jogo = new Jogo();
+        jogo.setNome(jogoDTORequest.getNome());
+        jogo.setStatus(jogoDTORequest.getStatus());
+        jogo.setCategoria(categoriaRepository.listarCategoriaPorId(jogoDTORequest.getCategoria()));
 
         Jogo jogoSave = this.jogoRepository.save(jogo);
 

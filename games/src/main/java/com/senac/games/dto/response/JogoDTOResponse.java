@@ -28,4 +28,13 @@ public class JogoDTOResponse {
     private int id;
     private String nome;
     private int status;
+    public Integer getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Integer categoria) {
+        this.categoria = categoria;
+    }
+
+    private Integer categoria;
 }
