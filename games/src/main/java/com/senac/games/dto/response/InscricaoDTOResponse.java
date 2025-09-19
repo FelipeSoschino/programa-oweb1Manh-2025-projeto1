@@ -31,4 +31,13 @@ public class InscricaoDTOResponse {
     private int id;
     private Date data;
     private int status;
+    public int getIdParticipante() {
+        return idParticipante;
+    }
+
+    public void setIdParticipante(int idParticipante) {
+        this.idParticipante = idParticipante;
+    }
+
+    private int idParticipante;
 }

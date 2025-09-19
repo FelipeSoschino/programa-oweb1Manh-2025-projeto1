@@ -1,6 +1,7 @@
 package com.senac.games.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -22,10 +23,31 @@ public class Inscricao {
     private int status;
 
 
+    public Integer getIdParticipante() {
+        return idParticipante = participante.getId();
+    }
+
+    public void setIdParticipante(Integer idParticipante) {
+        this.idParticipante = idParticipante;
+    }
+
+    @Transient
+    @JsonProperty("idParticipante")
+    private int idParticipante;
+
+    @Transient
+    @JsonProperty("idJogo")
+    private int idJogo;
+
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name="participante_id")
+    @JoinColumn(name="participante_id", nullable = false)
     private Participante participante;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name="jogo_id", nullable = false)
+    private Jogo jogo;
 
 
 

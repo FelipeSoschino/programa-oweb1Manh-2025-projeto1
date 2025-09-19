@@ -18,8 +18,8 @@ public interface PremioRepository extends JpaRepository<Premio, Integer> {
     @Query("UPDATE Premio p SET p.status = -1 where p.id = :id")
     void apagarPremio(Integer premioId);
 
-    @Query("SELECT P FROM Premio p where p.status >= 0")
+    @Query("SELECT p FROM Premio p where p.status >= 0")
     List<Premio> listarPremios();
-    @Query("SELECT P FROM Premio p where p.status >= 0 AND p.id = :id")
+    @Query("SELECT p FROM Premio p where p.status >= 0 AND p.id = :id")
     Premio listarPremioPorId(@Param("id") Integer premioId);
 }
